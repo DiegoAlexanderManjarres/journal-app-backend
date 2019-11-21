@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv'
-dotenv.config() 
+//import * as dotenv from 'dotenv'
+//dotenv.config() 
 
 import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
@@ -72,9 +72,8 @@ server.express.use(headersConfig)
 // helmet middleware
 server.express.use(helmet(helmetOptions))
 
-
                              /* start server */
 server.start(serverOptions, () => {
-    const port = process.env.PORT || 'http://localhost:4000'
-    console.log(`Server is running on ${port}`)
+    const port = process.env.PORT || '4000'
+    console.log(`Server is running on port ${port}`)
 })
