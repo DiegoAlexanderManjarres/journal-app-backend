@@ -1,0 +1,10 @@
+# prisma deploy -e env/path
+endpoint: ${env:PRISMA_ENDPOINT} 
+datamodel: datamodel.graphql
+secret: ${env:PRISMA_SECRET}
+
+generate:
+  - generator: typescript-client
+    output: ../src/generated/prisma-client/
+
+

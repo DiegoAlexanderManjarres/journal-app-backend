@@ -1,0 +1,22 @@
+type User {
+    id: ID! @id
+    name: String!
+    email: String @unique
+    password: String
+    entries: [Entry!]! @relation(name: "EntriesByUser", onDelete: CASCADE)
+    isConfirmed: Boolean! @default(value: false)
+    login_fail: Int! @default(value: 0)
+    last_login: DateTime!
+    updatedAt: DateTime! @updatedAt
+    createdAt: DateTime! @createdAt 
+}
+
+
+type Entry {
+    id: ID! @id
+    author: User! @relation(name: "EntriesByUser", onDelete: SET_NULL)
+    title: String!
+    text: String!
+    updatedAt: DateTime! @updatedAt
+    createdAt: DateTime! @createdAt 
+}

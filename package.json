@@ -1,0 +1,35 @@
+{
+  "name": "minimal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.ts --ext ts,graphql --exec ts-node",
+    "build": "tsc && yarn copy-files",
+    "heroku-postbuild": "yarn build",
+    "copy-files": "copyfiles -u 1 src/**/*.graphql dist"
+  },
+  "keywords": [],
+  "author": "Devan Beitel",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "@types/node": "^12.12.11",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "env-cmd": "^10.0.1",
+    "graphql-yoga": "^1.18.3",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "prisma-client-lib": "^1.34.10"
+  },
+  "devDependencies": {
+    "graphql-cli": "^3.0.14",
+    "nodemon": "^1.19.3",
+    "npm-run-all": "4.1.5",
+    "ts-node": "6.2.0",
+    "typescript": "2.9.2"
+  }
+}

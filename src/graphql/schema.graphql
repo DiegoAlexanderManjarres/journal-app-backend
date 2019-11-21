@@ -1,0 +1,69 @@
+type Query {
+    hello(name: String): String    
+    users: [User!]!
+    entries(
+        skip: Int, 
+        first: Int, 
+        last: Int, 
+        after: String, 
+        before: String
+        ): [Entry!]!
+}
+
+type Mutation {
+    createUser(data: UserCreateInput!): AuthPayload!
+    login(data: LoginInput): AuthPayload!
+    logout: Boolean!
+    addEntry(data: EntryCreateInput!): Entry!
+    editEntry(data: EntryEditInput!, entryId: ID!): Entry!
+    deleteEntry(entryId: ID!): Boolean!
+}
+
+type AuthPayload {
+    user: User!
+    token: String
+}
+
+type User {
+    id: ID! 
+    name: String!
+    email: String 
+    password: String
+    isConfirmed: Boolean!
+    entries: [Entry!]!
+    login_fail: Int!
+    last_login: String!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Entry {
+    id: ID! 
+    author: User!
+    title: String!
+    text: String! 
+    updatedAt: String!
+    createdAt: String!
+}
+
+input EntryCreateInput {
+    title: String!
+    text: String!
+}
+
+input EntryEditInput {
+    title: String
+    text: String
+}
+
+input UserCreateInput {
+    name: String!
+    email: String!
+    password: String!
+}
+
+
+input LoginInput {
+    email: String!
+    password: String!
+}
