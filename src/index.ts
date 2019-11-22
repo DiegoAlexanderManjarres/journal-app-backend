@@ -21,6 +21,18 @@ const serverOptions = {
 
 const helmetOptions = {
     permittedCrossDomainPolicies: { permitedPolicies: 'none' },
+    featurePolicy: {
+        features: {
+            documentWrite: ["'none'"],
+            geolocation: ["'none'"],
+            midi: ["'none'"],
+            oversizedImages: ["'none'"],
+            microphone: ["'none'"],
+            payment: ["'none'"],
+            syncXhr: ["'none'"],
+            fullscreen: ["self"]
+        }
+    },
     contentSecurityPolicy: {
         directives: {
             defaultSrc: [
