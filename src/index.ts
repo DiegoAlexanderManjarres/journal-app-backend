@@ -70,12 +70,6 @@ const headersConfig = (req, res, next) => {
 
                                     /* Middlewares */
 
-// enforces ssl on production stage
-/* 
-if (process.env.NODE_ENV === 'production') {
-    server.express.use(express_enforces_ssl())
-} 
- */
 
 // compression
 server.express.use(compression())
@@ -92,17 +86,6 @@ server.express.use(headersConfig)
 // helmet middleware
 server.express.use(helmet(helmetOptions))
 
-
-// redirect when in production http to https
-
-if (process.env.NODE_ENV === 'production') {
-    server.express.use((req, res, next) => {
-        if (req.protocol !== 'https') {
-            return res.redirect(301, 'https://guarded-everglades-74592.herokuapp.com')
-        }
-        next()
-    })
-} 
  
                              /* start server */
 server.start(serverOptions, () => {
