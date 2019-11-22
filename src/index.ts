@@ -62,7 +62,7 @@ server.express.use(compression())
 
 
 // coockie perser middleware
-server.express.use(cookieParser(process.env.COOKIE_SECTRET))
+server.express.use(cookieParser(process.env.COOKIE_SECRET))
 
 
 // allowed request methods
