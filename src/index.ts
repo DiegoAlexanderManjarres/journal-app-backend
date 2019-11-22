@@ -91,7 +91,7 @@ server.express.use(helmet(helmetOptions))
 if (process.env.NODE_ENV === 'production') {
     server.express.use((req, res, next) => {
         if (req.protocol !== 'https') {
-            return res.redirect(301, `https://` + req.get('host') + req.url)
+            return res.redirect(301, 'https://' + req.get('host') + req.url)
         }
         next()
     })
