@@ -92,6 +92,17 @@ server.express.use(headersConfig)
 // helmet middleware
 server.express.use(helmet(helmetOptions))
 
+
+// redirect when in production http to https
+if (process.env.NODE_ENV === 'production') {
+    server.express.use((req, res, next) => {
+        if (req.protocol !== 'https') {
+            return res.redirect(301, process.env.PRISMA_ENDPOINT)
+        }
+        next()
+    })
+} 
+
                              /* start server */
 server.start(serverOptions, () => {
     const port = process.env.PORT || '4000'
