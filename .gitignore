@@ -4,6 +4,5 @@ package-lock.json
 node_modules
 .idea
 .vscode
-yarn.log
 *.log
 config

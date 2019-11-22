@@ -30,7 +30,7 @@ const helmetOptions = {
             microphone: ["'none'"],
             payment: ["'none'"],
             syncXhr: ["'none'"],
-            fullscreen: ["self"]
+            fullscreen: ["'self'"]
         }
     },
     contentSecurityPolicy: {
