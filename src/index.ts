@@ -70,12 +70,12 @@ const headersConfig = (req, res, next) => {
 
                                     /* Middlewares */
 
-
 // enforces ssl on production stage
+/* 
 if (process.env.NODE_ENV === 'production') {
     server.express.use(express_enforces_ssl())
 } 
-
+ */
 
 // compression
 server.express.use(compression())
