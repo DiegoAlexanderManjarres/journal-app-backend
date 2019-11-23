@@ -75,12 +75,20 @@ const headersConfig = (req, res, next) => {
 server.express.use(compression())
 
 
+// coockie perser middleware
+server.express.use(cookieParser(process.env.COOKIE_SECRET))
+
+
 // allowed request methods
 server.express.use(headersConfig)
 
 
 // helmet middleware
 server.express.use(helmet(helmetOptions))
+
+
+// requre for redirect on not https
+server.express.set('trust proxy', true)
 
 
 // redirect when not on https
@@ -90,10 +98,6 @@ server.express.use((req, res, next) => {
     }    
     next()
 })
-
-
-// coockie perser middleware
-server.express.use(cookieParser(process.env.COOKIE_SECRET))
 
 
                              /* start server */
