@@ -67,6 +67,17 @@ const headersConfig = (req, res, next) => {
 }
 
 
+/** 
+ * redirect to https when http at production stage 
+ * must have express middleware set to 'trust proxy' true
+ */
+const redirect_to_https = (req, res, next) => {
+    if (process.env.NODE_ENV === 'production' && !req.secure) {
+        return res.redirect('https://' + req.get('host') + req.url)
+    }    
+    next()
+}
+
 
                                     /* Middlewares */
 
@@ -79,7 +90,7 @@ server.express.use(compression())
 server.express.use(cookieParser(process.env.COOKIE_SECRET))
 
 
-// allowed request methods
+// allowed http request methods
 server.express.use(headersConfig)
 
 
@@ -91,13 +102,8 @@ server.express.use(helmet(helmetOptions))
 server.express.set('trust proxy', true)
 
 
-// redirect when not on https
-server.express.use((req, res, next) => {
-    if (process.env.NODE_ENV === 'production' && !req.secure) {
-        return res.redirect('https://' + req.get('host') + req.url)
-    }    
-    next()
-})
+// redirect to https when http at production stage
+server.express.use(redirect_to_https)
 
 
                              /* start server */
