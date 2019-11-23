@@ -75,10 +75,6 @@ const headersConfig = (req, res, next) => {
 server.express.use(compression())
 
 
-// coockie perser middleware
-server.express.use(cookieParser(process.env.COOKIE_SECRET))
-
-
 // allowed request methods
 server.express.use(headersConfig)
 
@@ -94,6 +90,10 @@ server.express.use((req, res, next) => {
     }    
     next()
 })
+
+
+// coockie perser middleware
+server.express.use(cookieParser(process.env.COOKIE_SECRET))
 
 
                              /* start server */
