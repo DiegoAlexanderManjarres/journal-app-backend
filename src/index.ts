@@ -86,7 +86,16 @@ server.express.use(headersConfig)
 // helmet middleware
 server.express.use(helmet(helmetOptions))
 
- 
+
+// redirect when not on https
+server.express.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'production' && !req.secure) {
+        return res.redirect('https://' + req.get('host') + req.url)
+    }    
+    next()
+})
+
+
                              /* start server */
 server.start(serverOptions, () => {
     const port = process.env.PORT || '4000'
