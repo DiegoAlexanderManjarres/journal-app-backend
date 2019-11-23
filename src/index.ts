@@ -1,5 +1,3 @@
-//import * as dotenv from 'dotenv'
-//dotenv.config() 
 
 import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
