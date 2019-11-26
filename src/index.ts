@@ -2,7 +2,6 @@
 import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
 import * as compression from 'compression'
-import * as express_enforces_ssl from 'express-enforces-ssl'
 
 import server from './server'
 
@@ -33,6 +32,8 @@ const helmetOptions = {
         }
     },
     contentSecurityPolicy: {
+        // Need to look down csp for production
+            // todo
         directives: {
             defaultSrc: [
                 "'self'", 

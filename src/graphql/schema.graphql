@@ -60,6 +60,7 @@ input UserCreateInput {
     name: String!
     email: String!
     password: String!
+    repeat_password: String!
 }
 
 

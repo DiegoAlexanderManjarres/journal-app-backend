@@ -11,8 +11,16 @@ const email = Joi.string()
     })
     .required()
 
-
-const password = Joi.string().trim().pattern(/^[a-zA-Z0-9]{3,30}$/)    
+/**
+ * PASSWORD RULES
+ * 
+ * Must have at least one:
+ * - digit
+ * - Uppercase letter
+ * - lowercase letter
+ */
+const PASSWORD_RULES = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})/
+const password = Joi.string().trim().pattern(PASSWORD_RULES)    
 
 const title = Joi.string().trim().min(1).max(300)
 const text = Joi.string().trim().min(1).max(1024)
@@ -26,7 +34,7 @@ const signupInputSchema = Joi.object({
     name: Joi.string().min(3).max(60).required(),
     email,  
     password,
-    //repeat_password: Joi.ref('password')
+    repeat_password: Joi.ref('password')
 })
 
 

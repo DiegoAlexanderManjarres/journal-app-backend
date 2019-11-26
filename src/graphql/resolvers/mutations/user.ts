@@ -53,7 +53,7 @@ const setCookie = (req, token: string): void => {
 // createUser 
 const createUser = async (_: null, { data }, { req, prisma }) => {
     // validate input data
-    const inputs = validateInputs(data, signupInputSchema)   
+    const { repeat_password, ...inputs } = validateInputs(data, signupInputSchema)   
 
     // encrypt passord
     const password = passwordHash(inputs.password)
