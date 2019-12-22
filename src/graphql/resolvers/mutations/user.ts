@@ -2,6 +2,7 @@ import { compare } from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 
 import { User } from "../../../generated/prisma-client"
+import captchaCheck from '../../../utils/captcha'
 import passwordHash from '../../../utils/password_hash'
 import { 
     validateInputs, 
@@ -41,10 +42,12 @@ const setCookie = (req, token: string): void => {
     const options = { 
         httpOnly: true, 
         secure: process.env.NODE_ENV === 'production', 
-        signed: true 
+        signed: true,
+        sameSite: 'Strict' 
     }
     req.response.cookie('access_token', token, options)
 }
+
 
 
 
@@ -53,7 +56,9 @@ const setCookie = (req, token: string): void => {
 // createUser 
 const createUser = async (_: null, { data }, { req, prisma }) => {
     // validate input data
-    const { repeat_password, ...inputs } = validateInputs(data, signupInputSchema)   
+    const validated = validateInputs(data, signupInputSchema)   
+    const { repeat_password, recaptcha, ...inputs } = validated
+    await captchaCheck(req, recaptcha)
 
     // encrypt passord
     const password = passwordHash(inputs.password)
@@ -82,7 +87,8 @@ const createUser = async (_: null, { data }, { req, prisma }) => {
 const login = async (_: null, { data }, { req, prisma }) => {
     
     // validate input data
-    const inputs = validateInputs(data, loginInputSchema)      
+    const { recaptcha, ...inputs} = validateInputs(data, loginInputSchema)  
+    await captchaCheck(req, recaptcha)    
     
     // clear cookie
     req.response.clearCookie('access_token')

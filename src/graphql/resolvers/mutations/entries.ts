@@ -24,6 +24,11 @@ const editEntry = async (_: null, { data, entryId }, { req, prisma }) => {
 
     // validate inputs
     const inputs = validateInputs(data, entryEdit_InputSchema)
+
+    const dataInputs = {}
+    for (let input in inputs) {
+        if (inputs[input]) { dataInputs[input] = inputs[input]}
+    }
     
     // check on db if entry exist
     const entryExits = await prisma.$exists.entry({ 
@@ -32,18 +37,23 @@ const editEntry = async (_: null, { data, entryId }, { req, prisma }) => {
     })
     if (!entryExits) { throw new Error('Unable to update entry') }
 
-    return prisma.updateEntry({ data, where: { id: entryId } })
+    return prisma.updateEntry({ data: dataInputs, where: { id: entryId } })
 }
 
 
 const deleteEntry = async (_: null, { entryId }, { req, prisma }) => {
-    const userId = getUserId(req) 
+    const userId = getUserId(req)
+
     const entryExits = await prisma.$exists.entry({ 
         id: entryId, 
         author: { id: userId } 
     })
 
-    return entryExits ? !!prisma.deleteEntry({ id: entryId }) : false
+    if (!entryExits) { throw new Error('Could not find entry') }
+
+    const deletedEntry = await prisma.deleteEntry({ id: entryId })
+
+    return  !!deletedEntry
 }
 
 

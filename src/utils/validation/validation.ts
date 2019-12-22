@@ -27,10 +27,15 @@ const text = Joi.string().trim().min(1).max(1024)
 
 
 // user input schemas
-const loginInputSchema = Joi.object({ email, password })
+const loginInputSchema = Joi.object({ 
+    recaptcha: Joi.string().required(),
+    email, 
+    password 
+})
 
 
 const signupInputSchema = Joi.object({
+    recaptcha: Joi.string().required(),
     name: Joi.string().min(3).max(60).required(),
     email,  
     password,
@@ -45,7 +50,10 @@ const entryInputSchema = Joi.object({
     text: text.required()
 })
 
-const entryEdit_InputSchema = Joi.object({ title, text })
+const entryEdit_InputSchema = Joi.object({ 
+    title: title.allow(''), 
+    text: title.allow('') 
+})
 
 
 

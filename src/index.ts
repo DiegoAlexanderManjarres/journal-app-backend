@@ -11,8 +11,10 @@ import server from './server'
 const serverOptions = {
     port: process.env.PORT || 4000,
     cors: {
-       credentials: true,
-       origin: ["http://localhost:3000"] // frontend url
+        credentials: true,
+        origin: process.env.NODE_ENV !== 'production' 
+            ? ["http://localhost:8000"] 
+            : []// frontend url
     }
 }
 
@@ -60,6 +62,7 @@ const helmetOptions = {
 }
 
 
+/** headers configuration middleware */
 const headersConfig = (req, res, next) => {
     res.header({ 'Access-Control-Allow-Methods': 'POST' })
     next()

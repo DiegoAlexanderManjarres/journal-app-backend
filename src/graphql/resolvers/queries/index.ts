@@ -1,9 +1,10 @@
-import { users, hello } from './users'
+import { users, hello, isLoggedIn } from './users'
 import { entries } from './entries'
 
 
 const Query = {
     users,
+    isLoggedIn,
     hello,
     entries
 }

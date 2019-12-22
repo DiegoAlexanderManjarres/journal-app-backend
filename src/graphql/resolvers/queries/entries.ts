@@ -4,17 +4,22 @@ import { Entry } from '../../../generated/prisma-client'
 
 
 const entries = (parent, args, { req, prisma }, info) => {
-    const { skip, first, last, after, before } = args
+    const { skip, first, last, after, before, entryId } = args
     const userId = getUserId(req, true)
-    return prisma.entries({ 
-        where: { author: { id: userId } },
-        orderBy: 'createdAt_DESC',
-        skip,
-        first: first || 3,
-        last,
-        after,
-        before
-    })    
+
+    const _args = entryId 
+        ? { where: { id: entryId, author: { id: userId } } }
+        : { 
+            where: { author: { id: userId } },
+            orderBy: 'createdAt_DESC',
+            skip,
+            first: first || 3,
+            last,
+            after,
+            before
+        }
+
+    return prisma.entries(_args)    
 }
 
 
