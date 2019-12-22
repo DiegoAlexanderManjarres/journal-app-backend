@@ -14,7 +14,7 @@ const serverOptions = {
         credentials: true,
         origin: process.env.NODE_ENV !== 'production' 
             ? ["http://localhost:8000"] 
-            : []// frontend url
+            : ["http://localhost:8000"]// frontend url
     }
 }
 
