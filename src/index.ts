@@ -14,7 +14,7 @@ const serverOptions = {
         credentials: true,
         origin: process.env.NODE_ENV !== 'production' 
             ? ["http://localhost:8000"] 
-            : ["http://localhost:8000"]// frontend url
+            : ["https://5e041404de051012534bc4f1--laughing-leakey-4fe784.netlify.com"]// frontend url
     }
 }
 
