@@ -39,11 +39,14 @@ const log_login_fails = async (
  * takes the context request object an a token 
  */
 const setCookie = (req, token: string): void => {    
-    const options = { 
+    const options: any = { 
         httpOnly: true, 
         secure: process.env.NODE_ENV === 'production', 
         signed: true,
-        sameSite: 'Strict' 
+        sameSite: 'Lax' 
+    }
+    if (process.env.NODE_ENV === 'production') {
+        options.domain = 'laughing-leakey-4fe784.netlify.com'
     }
     req.response.cookie('access_token', token, options)
 }
