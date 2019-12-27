@@ -46,7 +46,7 @@ const setCookie = (req, token: string): void => {
         sameSite: 'Lax' 
     }
     if (process.env.NODE_ENV === 'production') {
-        options.domain = 'laughing-leakey-4fe784.netlify.com'
+        options.domain = '.laughing-leakey-4fe784.netlify.com'
     }
     req.response.cookie('access_token', token, options)
 }
