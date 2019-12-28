@@ -46,6 +46,10 @@ const setCookie = (req, token: string): void => {
         sameSite: 'Lax' 
     }
     
+    if (process.env.NODE_ENV === 'production') {
+        options.domain = '.simple-journal.xyz'
+    }
+    
     req.response.cookie('access_token', token, options)
 }
 
