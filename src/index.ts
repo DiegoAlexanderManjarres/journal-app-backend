@@ -15,7 +15,7 @@ const serverOptions = {
         origin: process.env.NODE_ENV !== 'production' 
             ? ["http://localhost:8000"] 
             : [
-                "https://api.simple-journal.xyz"
+                "https://simple-journal.xyz"
             ]// frontend url
     }
 }
