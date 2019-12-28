@@ -158,7 +158,7 @@ const login = async (_: null, { data }, { req, prisma }) => {
 
 // logout
 const logout = (parent, args, { req, prisma }) => {
-    req.response.clearCookie('access_token')
+    req.response.clearCookie('access_token', { path: '/' })
     return true
 }
 
