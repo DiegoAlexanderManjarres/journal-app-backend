@@ -15,7 +15,6 @@ const serverOptions = {
         origin: process.env.NODE_ENV !== 'production' 
             ? ["http://localhost:8000"] 
             : [
-                "https://laughing-leakey-4fe784.netlify.com",
                 "https://api.simple-journal.xyz"
             ]// frontend url
     }
