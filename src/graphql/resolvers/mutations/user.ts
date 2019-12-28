@@ -158,7 +158,13 @@ const login = async (_: null, { data }, { req, prisma }) => {
 
 // logout
 const logout = (parent, args, { req, prisma }) => {
-    req.response.clearCookie('access_token', { path: '/' })
+    const options: any = {}
+
+    if (process.env.NODE_ENV === 'production') {
+        options.domain = '.simple-journal.xyz'
+    }
+
+    req.response.clearCookie('access_token', options)
     return true
 }
 
