@@ -13,7 +13,7 @@ const entries = (parent, args, { req, prisma }, info) => {
             where: { author: { id: userId } },
             orderBy: 'createdAt_DESC',
             skip,
-            first: first || 3,
+            first: first || 5,
             last,
             after,
             before

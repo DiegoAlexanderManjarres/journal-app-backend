@@ -31,7 +31,7 @@ const User = {
                 return prisma.entries({
                     where: { author: { id: userId } },
                     orderBy: 'createdAt_DESC',
-                    first: 3
+                    first: 5
                 }, info)
             }
 
