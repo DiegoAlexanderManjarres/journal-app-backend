@@ -19,6 +19,7 @@ const addEntry = (_: null, { data }, { req, prisma }) => {
 }
 
 
+
 const editEntry = async (_: null, { data, entryId }, { req, prisma }) => {
     const userId = getUserId(req)
 
@@ -27,7 +28,7 @@ const editEntry = async (_: null, { data, entryId }, { req, prisma }) => {
 
     const dataInputs = {}
     for (let input in inputs) {
-        if (inputs[input]) { dataInputs[input] = inputs[input]}
+        if (inputs[input]) { dataInputs[input] = inputs[input] }
     }
     
     // check on db if entry exist
@@ -39,6 +40,7 @@ const editEntry = async (_: null, { data, entryId }, { req, prisma }) => {
 
     return prisma.updateEntry({ data: dataInputs, where: { id: entryId } })
 }
+
 
 
 const deleteEntry = async (_: null, { entryId }, { req, prisma }) => {
@@ -55,6 +57,7 @@ const deleteEntry = async (_: null, { entryId }, { req, prisma }) => {
 
     return  !!deletedEntry
 }
+
 
 
 export { addEntry, editEntry, deleteEntry }
